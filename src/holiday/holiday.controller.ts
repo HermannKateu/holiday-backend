@@ -50,8 +50,8 @@ export class HolidayController {
     deleteHoliday(@GetUser("id") userId: number ,
     @Param("id", ParseIntPipe) holidayId:number){
         return this.holiday.deleteHoliday(
-            userId,
             holidayId,
+            userId,
         )
     }
 }

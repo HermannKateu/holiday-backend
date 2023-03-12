@@ -73,14 +73,16 @@ export class HolidayService {
             }
         });
 
+        console.log(holiday)
+
         if (!holiday || holiday.userId !== userId) {
             throw new ForbiddenException("Access to the data denied")
-        }
+        };
 
         await this.prisma.holiday.delete({
             where: {
                 id: holidayId,
             }
-        })
+        });
     }
 }
