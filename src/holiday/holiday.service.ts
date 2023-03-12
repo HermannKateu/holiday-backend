@@ -72,9 +72,7 @@ export class HolidayService {
                 id: holidayId,
             }
         });
-
-        console.log(holiday)
-
+        
         if (!holiday || holiday.userId !== userId) {
             throw new ForbiddenException("Access to the data denied")
         };
