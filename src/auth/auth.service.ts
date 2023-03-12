@@ -33,7 +33,6 @@ export class AuthService {
        catch(error){
         if(error instanceof PrismaClientKnownRequestError){
             if(error.code === "P2002"){
-                console.log("test")
                 throw new ForbiddenException("User already exists");
             }
         }
@@ -41,12 +40,11 @@ export class AuthService {
     }
     
     async singIn(dto: AuthDto): Promise<unknown> {
-        const user = await this.prisma.user.findUnique({
-            where: {
-                email: dto.email
-            }
-        });
-
+            const user = await this.prisma.user.findUnique({
+                where: {
+                    email: dto.email
+                }
+            });
         if(!user){
             throw new ForbiddenException("User does not exist");
         }
@@ -58,7 +56,7 @@ export class AuthService {
         }
 
         delete user["hash"];
-        return this.signToken(user.id, user.email);;
+        return this.signToken(user.id, user.email);
     }
 
     async signToken(userId: number, email: string): Promise<{ access_token: string; }> {

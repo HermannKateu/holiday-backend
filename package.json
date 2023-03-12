@@ -6,7 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "db:dev:restart": "",
+    "dev:db:up": "docker-compose up",
+    "prisma:deploy": "prisma migrate deploy",
+    "dev:db:restart": "npm run dev:db:up && npx run prisma:deploy",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
