@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { AuthDto } from 'src/auth/dto';
+import { AuthDto, SignInDto } from 'src/auth/dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -12,7 +12,7 @@ export class AuthController {
     }
 
     @Post("signin")
-    async singIn(@Body() dto:AuthDto): Promise<unknown> {
+    async singIn(@Body() dto:SignInDto): Promise<unknown> {
         return await this.authService.singIn(dto);
     }
 }

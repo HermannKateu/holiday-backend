@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { AuthDto } from 'src/auth/dto';
+import { AuthDto, SignInDto } from 'src/auth/dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as argon from "argon2";
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
@@ -39,7 +39,7 @@ export class AuthService {
        }
     }
     
-    async singIn(dto: AuthDto): Promise<unknown> {
+    async singIn(dto: SignInDto): Promise<unknown> {
             const user = await this.prisma.user.findUnique({
                 where: {
                     email: dto.email

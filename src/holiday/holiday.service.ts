@@ -1,4 +1,4 @@
-import { Injectable, Get, Delete, Patch, ForbiddenException } from '@nestjs/common';
+import { Injectable, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateHolidayDto } from './dto';
 import { EditHolidayDto } from './dto/edit-holiday.dto';
@@ -19,7 +19,12 @@ export class HolidayService {
         const holiday = await this.prisma.holiday.create({
             data: {
                 userId,
-                ...dto,
+                startingDate: new Date(dto.startingDate),
+                endingDate: new Date(dto.endingDate),
+                returnDate: new Date(dto.returnDate),
+                description: dto.description,
+                type: dto.type,
+                numberOfDays: dto.numberOfDays
             }
         });
         
@@ -51,7 +56,12 @@ export class HolidayService {
                 id: holidayId,
             },
             data: {
-                ...dto,
+                startingDate: new Date(dto.startingDate),
+                endingDate: new Date(dto.endingDate),
+                returnDate: new Date(dto.returnDate),
+                description: dto.description,
+                type: dto.type,
+                numberOfDays: dto.numberOfDays,
             }
         });
     }
@@ -63,7 +73,7 @@ export class HolidayService {
             }
         });
 
-        if (!holidayId || holiday.userId !== userId) {
+        if (!holiday || holiday.userId !== userId) {
             throw new ForbiddenException("Access to the data denied")
         }
 

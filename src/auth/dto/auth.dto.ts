@@ -22,3 +22,14 @@ export class AuthDto {
     @IsString()
     gender: string;
 }
+
+export class SignInDto {
+    @IsEmail()
+    @IsNotEmpty()
+    @IsString()
+    email: string;
+
+    @IsNotEmpty()
+    @IsString()
+    password: string;
+}

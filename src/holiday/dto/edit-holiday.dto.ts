@@ -1,4 +1,5 @@
-import { IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsInt, IsOptional, IsString } from "class-validator";
 
 export class EditHolidayDto {
     @IsString()
@@ -13,7 +14,8 @@ export class EditHolidayDto {
     @IsOptional()
     returnDate?: string;
 
-    @IsString()
+    @Type(() => Number)
+    @IsInt()
     @IsOptional()
     numberOfDays?: number;
 
