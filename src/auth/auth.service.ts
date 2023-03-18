@@ -56,7 +56,7 @@ export class AuthService {
         }
 
         delete user["hash"];
-        return this.signToken(user.id, user.email);
+        return user;
     }
 
     async signToken(userId: number, email: string): Promise<{ access_token: string; }> {
@@ -66,7 +66,7 @@ export class AuthService {
         }
         const secret = this.configService.get("JWT_SECRET");
         const token = await this.jwt.signAsync(payload, {
-            expiresIn: "6h",
+            expiresIn: "10h",
             secret: secret,
         });
         return {
