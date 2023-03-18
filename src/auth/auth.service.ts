@@ -45,7 +45,6 @@ export class AuthService {
                     email: dto.email
                 }
             });
-            
         if(!user){
             throw new ForbiddenException("User does not exist");
         }
